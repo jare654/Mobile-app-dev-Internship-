@@ -1,0 +1,130 @@
+import '../core/entities.dart';
+
+final List<Property> fakeProperties = [
+  Property(
+    id: '1',
+    title: 'Bole Skyline Apartment',
+    titleAm: 'የቦሌ ስካይላይን አፓርታማ',
+    description:
+        'Bright family apartment near cafes, schools, and the airport road in Bole. The home includes a modern kitchen, balcony views, and secure parking.',
+    location: 'Bole, Addis Ababa',
+    locationAm: 'ቦሌ፣ አዲስ አበባ',
+    price: 18500000,
+    imageUrls: const [
+      'Img/IMG_20210512_142230_632_compress40.jpg',
+      'Img/images-5.jpeg',
+      'Img/images-6.jpeg',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(hours: 4)),
+    bedrooms: 3,
+    bathrooms: 2,
+    areaSqM: 148,
+  ),
+  Property(
+    id: '2',
+    title: 'Yeka Hillside Villa',
+    titleAm: 'የየካ ኮረብታ ቪላ',
+    description:
+        'Spacious villa with compound parking and a landscaped yard on the Yeka hillside. Ideal for a larger family looking for privacy and city access.',
+    location: 'Yeka, Addis Ababa',
+    locationAm: 'የካ፣ አዲስ አበባ',
+    price: 42000000,
+    imageUrls: const [
+      'Img/06634c41ed67e1-a-nice-villa-house-at-wossen-hill-side-for-sale-yeka-addis-ababa.jpg',
+      'Img/photo_2022-09-29_03-37-28-592x444-1.jpg',
+      'Img/images-6.jpeg',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(days: 1)),
+    bedrooms: 5,
+    bathrooms: 4,
+    areaSqM: 320,
+  ),
+  Property(
+    id: '3',
+    title: 'CMC Family Residence',
+    titleAm: 'የሲኤምሲ የቤተሰብ መኖሪያ',
+    description:
+        'Comfortable residence in the CMC area with a generous living room, natural light, and easy access to supermarkets and schools.',
+    location: 'CMC, Addis Ababa',
+    locationAm: 'ሲኤምሲ፣ አዲስ አበባ',
+    price: 23800000,
+    imageUrls: const [
+      'Img/3551649_NjIwLTgyNy00M2U0Y2VkODQ4.webp',
+      'Img/IMG_20210512_142230_632_compress40.jpg',
+      'Img/photo_2022-09-29_03-37-28-592x444-1.jpg',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(days: 2)),
+    bedrooms: 4,
+    bathrooms: 3,
+    areaSqM: 210,
+  ),
+  Property(
+    id: '4',
+    title: 'Sar Bet Penthouse',
+    titleAm: 'የሳር ቤት ፔንትሃውስ',
+    description:
+        'Penthouse living close to the ring road with private terrace space, elevator access, and polished interior finishes for modern city living.',
+    location: 'Sar Bet, Addis Ababa',
+    locationAm: 'ሳር ቤት፣ አዲስ አበባ',
+    price: 29800000,
+    imageUrls: const [
+      'Img/photo_2022-09-29_03-37-28-592x444-1.jpg',
+      'Img/images-5.jpeg',
+      'Img/3551649_NjIwLTgyNy00M2U0Y2VkODQ4.webp',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(hours: 15)),
+    bedrooms: 3,
+    bathrooms: 3,
+    areaSqM: 188,
+  ),
+  Property(
+    id: '5',
+    title: 'Lebu Garden House',
+    titleAm: 'የለቡ የአትክልት ስፍራ ቤት',
+    description:
+        'Warm family home in Lebu with a quiet street presence, a small garden, and good access to schools, retail, and commuter roads.',
+    location: 'Lebu, Addis Ababa',
+    locationAm: 'ለቡ፣ አዲስ አበባ',
+    price: 17600000,
+    imageUrls: const [
+      'Img/images-6.jpeg',
+      'Img/images-5.jpeg',
+      'Img/IMG_20210512_142230_632_compress40.jpg',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(days: 3)),
+    bedrooms: 3,
+    bathrooms: 2,
+    areaSqM: 165,
+  ),
+  Property(
+    id: '6',
+    title: 'Kazanchis Executive Loft',
+    titleAm: 'የካዛንቺስ ኤግዚኪዩቲቭ ሎፍት',
+    description:
+        'A compact executive loft in Kazanchis for professionals who want central access, modern finishes, and strong rental potential.',
+    location: 'Kazanchis, Addis Ababa',
+    locationAm: 'ካዛንቺስ፣ አዲስ አበባ',
+    price: 13200000,
+    imageUrls: const [
+      'Img/images-5.jpeg',
+      'Img/3551649_NjIwLTgyNy00M2U0Y2VkODQ4.webp',
+      'Img/photo_2022-09-29_03-37-28-592x444-1.jpg',
+    ],
+    status: PropertyStatus.published,
+    lastUpdated: DateTime.now().subtract(const Duration(days: 4)),
+    bedrooms: 2,
+    bathrooms: 2,
+    areaSqM: 96,
+  ),
+];
+
+const fakeUser = User(
+  id: 'u1',
+  name: 'Abel Kebede',
+  email: 'abel.kebede@example.com',
+);
