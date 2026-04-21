@@ -50,5 +50,7 @@ Execute the following command to run unit tests:
 flutter test
 ```
 
-## 📸 Screenshots
-*(Add screenshots or video link here as per submission requirements)*
+## 📸 Media
+
+- **Demo Video**: [Watch the walkthrough video](https://github.com/jare654/Mobile-app-dev-Internship-/releases/download/v1.0.0/demo_video.mov)
+- **APK Download**: [Download intern_property_app_v1.0.0.apk](https://github.com/jare654/Mobile-app-dev-Internship-/releases/download/v1.0.0/intern_property_app_v1.0.0.apk)
