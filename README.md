@@ -39,9 +39,10 @@ The project follows a clear separation of concerns:
 - Android Studio / VS Code with Flutter extension
 
 ### Installation
-1. Clone the repository.
-2. Run `flutter pub get` to fetch dependencies.
-3. Run `flutter run` to start the application.
+1. **Download the APK**: You can download the latest production build from the [Releases](https://github.com/jare654/Mobile-app-dev-Internship-/releases/tag/v1.0.0) page.
+2. Clone the repository.
+3. Run `flutter pub get` to fetch dependencies.
+4. Run `flutter run` to start the application.
 
 ### Running Tests
 Execute the following command to run unit tests:
