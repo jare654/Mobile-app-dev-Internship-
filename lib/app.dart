@@ -20,15 +20,15 @@ class PropertyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(appControllerProvider);
     final strings = AppStrings(controller.language);
-    return MaterialApp(
-      title: strings.appTitle,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: controller.themeMode,
-      debugShowCheckedModeBanner: false,
-      home: AppControllerScope(
-        controller: controller,
-        child: const MainShell(),
+    return AppControllerScope(
+      controller: controller,
+      child: MaterialApp(
+        title: strings.appTitle,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: controller.themeMode,
+        debugShowCheckedModeBanner: false,
+        home: const MainShell(),
       ),
     );
   }

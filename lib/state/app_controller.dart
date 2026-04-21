@@ -275,6 +275,9 @@ class AppController extends ChangeNotifier {
       notifyListeners();
       return;
     }
+
+    // Simulate online send
+    await Future<void>.delayed(const Duration(milliseconds: 600));
     notifyListeners();
   }
 
