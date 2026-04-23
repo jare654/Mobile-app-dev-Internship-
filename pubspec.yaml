@@ -1,0 +1,59 @@
+name: news_app
+description: PulseNews — A production-grade Flutter news reader app using NewsAPI. Built for AAU Mobile Application Development Assignment 2, Track B.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── Networking (REQUIRED by assignment) ──────────────────────────────────
+  http: ^1.2.1                     # All HTTP requests — never Dio
+
+  # ── Security — API Key Management ────────────────────────────────────────
+  flutter_dotenv: ^5.1.0           # Load .env without exposing key in code
+
+  # ── External URLs ─────────────────────────────────────────────────────────
+  url_launcher: ^6.2.5             # Open full articles in system browser
+
+  # ── State Management ─────────────────────────────────────────────────────
+  provider: ^6.1.2                 # ChangeNotifier + Consumer pattern
+
+  # ── UI / UX ───────────────────────────────────────────────────────────────
+  shimmer: ^3.0.0                  # Skeleton loading animations
+  cached_network_image: ^3.3.1     # Efficient image loading + disk cache
+  google_fonts: ^6.2.1             # Premium editorial typography
+
+  # ── Utilities ─────────────────────────────────────────────────────────────
+  intl: ^0.19.0                    # Date formatting ("2 hours ago", etc.)
+  shared_preferences: ^2.2.3       # Persistent bookmarks (BONUS)
+  share_plus: ^7.2.1               # Native share sheet (Industry Standard)
+  path_provider: ^2.1.2            # Local storage for caching
+  
+  # ── In-App Reader ─────────────────────────────────────────────────────────
+  webview_flutter: ^4.7.0          # Native in-app article reading
+
+  # ── Cloud & Notifications (UI/Architecture ready) ─────────────────────────
+  firebase_core: ^3.10.1           # Updated to latest stable
+  firebase_auth: ^5.4.1           # Updated to latest stable
+  cloud_firestore: ^5.6.1         # Updated to latest stable
+  firebase_messaging: ^15.2.1      # Updated to latest stable
+
+  # ── Animation ─────────────────────────────────────────────────────────────
+  flutter_staggered_animations: ^1.0.0 # Polished grid entrance
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/.env                  # Loaded by flutter_dotenv — NEVER commit the actual .env
