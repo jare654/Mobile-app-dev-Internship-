@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -36,6 +36,8 @@ dependencies:
   
   # ── In-App Reader ─────────────────────────────────────────────────────────
   webview_flutter: ^4.7.0          # Native in-app article reading
+  webview_flutter_android: ^3.15.0
+  webview_flutter_wkwebview: ^3.13.0
 
   # ── Cloud & Notifications (UI/Architecture ready) ─────────────────────────
   firebase_core: ^3.10.1           # Updated to latest stable
@@ -46,14 +48,62 @@ dependencies:
   # ── Animation ─────────────────────────────────────────────────────────────
   flutter_staggered_animations: ^1.0.0 # Polished grid entrance
 
+  # ── Dependency Injection ───────────────────────────────────────────────────
+  get_it: ^7.6.4                   # Service locator for DI
+  injectable: ^2.3.2               # Code generation for DI
+  dartz: ^0.10.1                   # Functional programming with Either
+  equatable: ^2.0.5                # Value equality
+  uuid: ^4.2.1                     # UUID generation
+
+  # ── Advanced Storage ───────────────────────────────────────────────────────
+  hive: ^2.2.3                     # Fast key-value database
+  hive_flutter: ^1.1.0             # Hive Flutter integration
+  json_annotation: ^4.8.1          # JSON serialization code generation
+
+  # ── Security & Authentication ─────────────────────────────────────────────
+  crypto: ^3.0.3                   # Cryptographic functions
+  flutter_secure_storage: ^9.0.0   # Secure storage for sensitive data
+  jwt_decode: ^0.3.0               # JWT token decoding
+
+  # ── Advanced Networking ───────────────────────────────────────────────────
+  retry: ^3.1.2                    # Retry mechanism for failed requests
+  connectivity_plus: ^5.0.2        # Network connectivity monitoring
+
+  # ── Data Validation ───────────────────────────────────────────────────────
+  form_validator: ^2.1.1           # Form validation utilities
+
+  # ── Background Processing ─────────────────────────────────────────────────
+  workmanager: ^0.9.0              # Background task scheduling
+  background_fetch: ^1.2.1        # Background sync capabilities
+
+  # ── Performance Monitoring ────────────────────────────────────────────────
+  device_info_plus: ^9.1.1         # Device information
+  package_info_plus: ^4.2.0        # App information
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  
+  # ── Code Generation ───────────────────────────────────────────────────────
+  build_runner: ^2.4.8             # Code generation runner
+  injectable_generator: ^2.4.1     # DI code generation
+  json_serializable: ^6.7.1        # JSON serialization code generation
+  hive_generator: ^2.0.1          # Hive code generation
+  
+  # ── Testing ───────────────────────────────────────────────────────────────
+  mockito: ^5.4.4                  # Mocking framework
+  network_image_mock: ^2.1.1       # Mock network images in tests
+  integration_test:
+    sdk: flutter                   # Integration testing
+  golden_toolkit: ^0.15.0          # Golden testing for UI
+  
+  # ── Code Quality ─────────────────────────────────────────────────────────
+  coverage: ^1.6.3                # Code coverage reporting
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/.env                  # Loaded by flutter_dotenv — NEVER commit the actual .env
+    - assets/logo.png

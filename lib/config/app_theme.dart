@@ -50,7 +50,6 @@ class AppTheme {
         primary: lightPrimary,
         secondary: lightSecondary,
         surface: lightSurface,
-        background: lightBackground,
         onSurface: lightOnSurface,
         onSurfaceVariant: lightOnSurfaceVariant,
         outline: lightOutline,
@@ -60,36 +59,36 @@ class AppTheme {
         headlineLarge: GoogleFonts.newsreader(
           color: lightOnSurface,
           fontWeight: FontWeight.bold,
-          fontSize: 36,
+          fontSize: 28,
           height: 1.1,
           letterSpacing: -0.5,
         ),
         headlineMedium: GoogleFonts.newsreader(
           color: lightOnSurface,
           fontWeight: FontWeight.w600,
-          fontSize: 28,
+          fontSize: 22,
           height: 1.2,
         ),
         titleLarge: GoogleFonts.workSans(
           color: lightOnSurface,
           fontWeight: FontWeight.w700,
-          fontSize: 20,
+          fontSize: 18,
           height: 1.3,
         ),
         bodyLarge: GoogleFonts.workSans(
           color: lightOnSurface,
-          fontSize: 17,
+          fontSize: 15,
           height: 1.6,
         ),
         bodyMedium: GoogleFonts.workSans(
           color: lightOnSurfaceVariant,
-          fontSize: 14,
+          fontSize: 13,
           height: 1.5,
         ),
         labelSmall: GoogleFonts.workSans(
           color: lightOnSurfaceVariant,
           fontWeight: FontWeight.w700,
-          fontSize: 11,
+          fontSize: 10,
           letterSpacing: 0.8,
         ),
       ),
@@ -123,7 +122,7 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: lightSurface,
         indicatorColor: lightSecondary.withAlpha(20),
-        labelTextStyle: MaterialStateProperty.all(
+        labelTextStyle: WidgetStateProperty.all(
           const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
         ),
       ),
@@ -159,7 +158,6 @@ class AppTheme {
         primary: darkSecondary,
         secondary: darkSecondary,
         surface: darkSurface,
-        background: darkBackground,
         onSurface: darkPrimary,
       ),
       
@@ -167,35 +165,35 @@ class AppTheme {
         headlineLarge: GoogleFonts.newsreader(
           color: darkPrimary,
           fontWeight: FontWeight.bold,
-          fontSize: 36,
+          fontSize: 28,
           height: 1.1,
         ),
         headlineMedium: GoogleFonts.newsreader(
           color: darkPrimary,
           fontWeight: FontWeight.w600,
-          fontSize: 28,
+          fontSize: 22,
           height: 1.2,
         ),
         titleLarge: GoogleFonts.workSans(
           color: darkPrimary,
           fontWeight: FontWeight.w700,
-          fontSize: 20,
+          fontSize: 18,
           height: 1.3,
         ),
         bodyLarge: GoogleFonts.workSans(
           color: darkPrimary,
-          fontSize: 17,
+          fontSize: 15,
           height: 1.6,
         ),
         bodyMedium: GoogleFonts.workSans(
           color: Colors.white70,
-          fontSize: 14,
+          fontSize: 13,
           height: 1.5,
         ),
         labelSmall: GoogleFonts.workSans(
           color: Colors.white60,
           fontWeight: FontWeight.w700,
-          fontSize: 11,
+          fontSize: 10,
           letterSpacing: 0.8,
         ),
       ),
@@ -228,7 +226,7 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: darkBackground,
         indicatorColor: darkSecondary.withAlpha(40),
-        labelTextStyle: MaterialStateProperty.all(
+        labelTextStyle: WidgetStateProperty.all(
           const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
         ),
       ),

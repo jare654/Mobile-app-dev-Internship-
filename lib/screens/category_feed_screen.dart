@@ -42,11 +42,12 @@ class _CategoryFeedScreenState extends State<CategoryFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppTheme.background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(widget.categoryName),
-        backgroundColor: AppTheme.background,
+        backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: FutureBuilder<FetchResult>(
         future: _feedFuture,

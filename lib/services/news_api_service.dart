@@ -5,7 +5,8 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -55,21 +56,20 @@ class NewsApiService {
   // ── Private configuration ─────────────────────────────────────────────────
   static const String _baseUrl = 'newsapi.org';
 
-  /// Loaded from assets/.env — throws [StateError] on startup if key is absent,
-  /// which fails fast and loud rather than silently serving 401 errors.
-  final String _apiKey = dotenv.env['NEWS_API_KEY']!;
+  /// Loaded from assets/.env — handles missing API key gracefully
+  final String? _apiKey = dotenv.env['NEWS_API_KEY']?.trim();
 
   static const Duration _timeout = Duration(seconds: 10);
 
   /// Shared headers sent with every request.
   /// Using X-Api-Key header is preferred over the query param — it avoids
   /// the key appearing in server access logs and browser history.
-  Map<String, String> get _headers => {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-Api-Key': _apiKey,
-        'User-Agent': 'PulseNewsPro/1.0',
-      };
+  Map<String, String> get _headers {
+    return {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+  }
 
   // ── BONUS: In-memory cache ─────────────────────────────────────────────────
   // Key format: 'headlines:$countryCode:$page'  |  'search:$query'
@@ -106,11 +106,23 @@ class NewsApiService {
 
   // ── Private: core GET helper ──────────────────────────────────────────────
 
-  /// Executes a GET request and returns the decoded JSON body as a [Map].
+  /// Executes GET request and returns the decoded JSON body as a [Map].
   /// All networking errors propagate upward; caught only by the [provider].
   Future<Map<String, dynamic>> _get(Uri uri) async {
+    // Check if API key is configured
+    if (_apiKey == null || _apiKey!.isEmpty) {
+      throw Exception('NEWS_API_KEY not configured. Please add your API key to assets/.env file.');
+    }
+    
+    var finalUri = uri;
+    if (kIsWeb) {
+      // NewsAPI free tier blocks requests from browsers (CORS).
+      // We use a proxy to bypass this for development/web preview.
+      finalUri = Uri.parse('https://corsproxy.io/?${Uri.encodeComponent(uri.toString())}');
+    }
+    
     final response =
-        await http.get(uri, headers: _headers).timeout(_timeout);
+        await http.get(finalUri, headers: _headers).timeout(_timeout);
     _checkResponse(response);
     return jsonDecode(response.body) as Map<String, dynamic>;
   }
@@ -164,6 +176,7 @@ class NewsApiService {
       'country': countryCode,
       'pageSize': AppConstants.paginationLoadSize.toString(),
       'page': page.toString(),
+      'apiKey': _apiKey ?? '',
     };
 
     if (category != null) {
@@ -220,6 +233,7 @@ class NewsApiService {
       'pageSize': AppConstants.pageSize.toString(),
       'sortBy': 'publishedAt',
       'language': 'en',
+      'apiKey': _apiKey ?? '',
     });
 
     final body = await _get(uri);

@@ -42,7 +42,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
           _buildSliverAppBar(context),
@@ -53,10 +53,13 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   }
 
   SliverAppBar _buildSliverAppBar(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     return SliverAppBar(
-      expandedHeight: widget.article.urlToImage != null ? 240 : 0,
+      expandedHeight: 240,
       pinned: true,
-      backgroundColor: AppTheme.background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       leading: _BackButton(),
       actions: [
         Consumer<BookmarksProvider>(
@@ -65,7 +68,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
             return IconButton(
               icon: Icon(
                 isSaved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
-                color: isSaved ? AppTheme.accent : AppTheme.textPrimary,
+                color: isSaved ? AppTheme.accent : colorScheme.onSurface,
               ),
               tooltip: isSaved ? 'Remove Bookmark' : 'Save Article',
               onPressed: () => provider.toggleBookmark(widget.article),
@@ -78,8 +81,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
           onPressed: () => _shareArticle(context),
         ),
       ],
-      flexibleSpace: widget.article.urlToImage != null
-          ? FlexibleSpaceBar(
+      flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -90,10 +92,10 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     placeholder: (_, __) =>
                         const ShimmerBox(height: double.infinity),
                     errorWidget: (_, __, ___) => Container(
-                      color: AppTheme.surface,
-                      child: const Icon(
+                      color: theme.colorScheme.surface,
+                      child: Icon(
                         Icons.image_not_supported_rounded,
-                        color: AppTheme.border,
+                        color: theme.dividerColor,
                         size: 48,
                       ),
                     ),
@@ -115,8 +117,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   ),
                 ],
               ),
-            )
-          : null,
+            ),
     );
   }
 
@@ -296,9 +297,9 @@ class _BackButton extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            color: AppTheme.background.withAlpha(200),
+            color: Theme.of(context).scaffoldBackgroundColor.withAlpha(200),
             shape: BoxShape.circle,
-            border: Border.all(color: AppTheme.border, width: 0.5),
+            border: Border.all(color: Theme.of(context).dividerColor, width: 0.5),
           ),
           child: const Icon(Icons.arrow_back_rounded, size: 18),
         ),

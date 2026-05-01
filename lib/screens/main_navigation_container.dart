@@ -26,24 +26,26 @@ class _MainNavigationContainerState extends State<MainNavigationContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(color: AppTheme.border, width: 0.5),
+            top: BorderSide(color: theme.dividerColor, width: 0.5),
           ),
         ),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) => setState(() => _currentIndex = index),
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppTheme.background,
+          backgroundColor: theme.navigationBarTheme.backgroundColor ?? theme.scaffoldBackgroundColor,
           selectedItemColor: AppTheme.accent,
-          unselectedItemColor: AppTheme.textCaption,
+          unselectedItemColor: theme.textTheme.labelSmall?.color,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11),
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 11),
           items: const [

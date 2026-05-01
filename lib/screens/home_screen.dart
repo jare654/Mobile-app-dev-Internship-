@@ -3,16 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../config/app_theme.dart';
 import '../models/article.dart';
 import '../providers/history_provider.dart';
 import '../providers/news_provider.dart';
+import '../providers/daily_streak_provider.dart';
 import '../widgets/article_card.dart';
 import '../widgets/cached_badge.dart';
+import '../widgets/daily_streak_widget.dart';
 import '../widgets/error_view.dart';
 import '../widgets/loading_shimmer.dart';
 import 'article_detail_screen.dart';
+import 'all_articles_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -99,6 +103,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     else if (newsProvider.headlines.isEmpty)
                       const SliverFillRemaining(child: _EmptyState())
                     else ...[
+                      // Daily Streak Widget
+                      SliverToBoxAdapter(
+                        child: GestureDetector(
+                          onTap: () {
+                            context.read<DailyStreakProvider>().recordDailyVisit();
+                          },
+                          child: const DailyStreakWidget(),
+                        ),
+                      ),
                       // 1. Featured Hero
                       SliverToBoxAdapter(
                         child: _FeaturedHero(
@@ -143,12 +156,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       SliverPadding(
                         padding: const EdgeInsets.fromLTRB(20, 24, 20, 12),
                         sliver: SliverToBoxAdapter(
-                          child: Text(
-                            'LATEST STORIES',
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: AppTheme.pulseRed,
-                                  letterSpacing: 1.5,
-                                ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'LATEST STORIES',
+                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                      color: AppTheme.pulseRed,
+                                      letterSpacing: 1.5,
+                                    ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AllArticlesScreen(),
+                                    ),
+                                  );
+                                },
+                                child: const Text('SEE ALL'),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -297,10 +326,13 @@ class _FeaturedHero extends StatelessWidget {
             children: [
               AspectRatio(
                 aspectRatio: 16 / 9,
-                child: Image.network(
-                  article.urlToImage ?? '',
+                child: CachedNetworkImage(
+                  imageUrl: article.urlToImage!,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(color: AppTheme.lightSurfaceContainer),
+                  placeholder: (_, __) => Container(color: AppTheme.lightSurfaceContainer),
+                  errorWidget: (_, __, ___) => Container(color: AppTheme.lightSurfaceContainer),
+                  memCacheHeight: 400,
+                  memCacheWidth: 800,
                 ),
               ),
               Positioned(
@@ -381,6 +413,21 @@ class _SecondaryStoryTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (article.urlToImage != null) ...[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: CachedNetworkImage(
+                  imageUrl: article.urlToImage!,
+                  fit: BoxFit.cover,
+                  placeholder: (_, __) => Container(color: AppTheme.lightSurfaceContainer),
+                  errorWidget: (_, __, ___) => Container(color: AppTheme.lightSurfaceContainer),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
           Text(
             'LATEST NEWS',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -433,7 +480,12 @@ class _SmallHistoryCard extends StatelessWidget {
                 child: SizedBox(
                   width: 90,
                   height: double.infinity,
-                  child: Image.network(article.urlToImage!, fit: BoxFit.cover),
+                  child: CachedNetworkImage(
+                    imageUrl: article.urlToImage!,
+                    fit: BoxFit.cover,
+                    memCacheHeight: 200,
+                    memCacheWidth: 120,
+                  ),
                 ),
               ),
             Expanded(

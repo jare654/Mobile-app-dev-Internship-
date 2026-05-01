@@ -74,26 +74,24 @@ class ArticleCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (article.urlToImage != null) ...[
-                  const SizedBox(width: 16),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: CachedNetworkImage(
-                        imageUrl: article.urlToImage!,
-                        fit: BoxFit.cover,
-                        placeholder: (_, __) => const ShimmerBox(height: 100, width: 100),
-                        errorWidget: (_, __, ___) => Container(color: AppTheme.lightSurfaceContainer),
-                      ),
+                const SizedBox(width: 16),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: CachedNetworkImage(
+                      imageUrl: article.urlToImage!,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) => const ShimmerBox(height: 100, width: 100),
+                      errorWidget: (_, __, ___) => Container(color: AppTheme.lightSurfaceContainer),
                     ),
                   ),
-                ],
+                ),
               ],
             ),
             const SizedBox(height: 12),
-            if (article.description != null && article.urlToImage == null)
+            if (article.description != null)
               Text(
                 article.description!,
                 style: Theme.of(context).textTheme.bodyMedium,

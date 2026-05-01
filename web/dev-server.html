@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseNews - Chrome Security Fix</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .solution {
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #FFC107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Chrome Security Issue Fixed</h1>
+        
+        <div class="solution">
+            <h2>✅ Solution: Development Server</h2>
+            <p>Chrome blocks file:// URLs from making API calls. Use this development server to bypass the restriction:</p>
+            
+            <div class="code-block">
+                # Step 1: Start Development Server<br>
+                python3 -m http.server 8000<br><br>
+                
+                # Step 2: Open in Chrome<br>
+                http://localhost:8000<br><br>
+                
+                # Step 3: Click "Advanced" → "Proceed to localhost" if security warning appears
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="http://localhost:8000" class="button" target="_blank">
+                    🚀 Open Development Server
+                </a>
+            </div>
+        </div>
+
+        <div class="warning">
+            <h2>⚠️ Important Notes</h2>
+            <ul>
+                <li><strong>Keep this server running</strong> while using the Flutter app</li>
+                <li><strong>Only for development</strong> - not for production</li>
+                <li><strong>Alternative:</strong> Use Firefox instead of Chrome</li>
+                <li><strong>Alternative:</strong> Run Chrome with <code>--disable-web-security</code></li>
+            </ul>
+        </div>
+
+        <div class="solution">
+            <h2>🔧 Quick Commands</h2>
+            <div class="code-block">
+                # Start server in background<br>
+                python3 -m http.server 8000 &<br><br>
+                
+                # Kill server when done<br>
+                lsof -ti:8000 | xargs kill -9<br><br>
+                
+                # Chrome with disabled security (alternative)<br>
+                chrome --disable-web-security --user-data-dir=/tmp/chrome_dev
+            </div>
+        </div>
+    </div>
+</body>
+</html>

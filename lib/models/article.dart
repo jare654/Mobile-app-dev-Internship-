@@ -45,11 +45,22 @@ class Article {
         ? 'No title available'
         : rawTitle;
 
+    // Ensure urlToImage is never null by providing a varied fallback placeholder
+    final rawImageUrl = json['urlToImage'] as String?;
+    String urlToImage;
+    if (rawImageUrl == null || rawImageUrl.isEmpty || rawImageUrl == 'null') {
+      // Use a varied placeholder based on title hash to keep it stable but different for each article
+      final seed = title.hashCode.abs() % 1000;
+      urlToImage = 'https://picsum.photos/seed/$seed/800/450';
+    } else {
+      urlToImage = rawImageUrl;
+    }
+
     return Article(
       title: title,
       description: _sanitise(json['description'] as String?),
       url: json['url'] as String? ?? '',
-      urlToImage: json['urlToImage'] as String?,
+      urlToImage: urlToImage,
       sourceName: source['name'] as String? ?? 'Unknown Source',
       author: _sanitise(json['author'] as String?),
       publishedAt: _parseDate(json['publishedAt'] as String?),

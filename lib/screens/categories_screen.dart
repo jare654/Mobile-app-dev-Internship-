@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../config/app_theme.dart';
 import '../providers/news_provider.dart';
@@ -56,21 +57,21 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: AppTheme.background,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             expandedHeight: 120,
             floating: true,
             pinned: true,
-            backgroundColor: AppTheme.background,
+            backgroundColor: theme.scaffoldBackgroundColor,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 'Explore',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                style: theme.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textPrimary,
                     ),
               ),
               centerTitle: false,
@@ -175,9 +176,11 @@ class _ModernCategoryCard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             // Background Image
-            Image.network(
-              imageUrl,
+            CachedNetworkImage(
+              imageUrl: imageUrl,
               fit: BoxFit.cover,
+              memCacheHeight: 300,
+              memCacheWidth: 400,
             ),
             // Gradient Overlay
             DecoratedBox(
@@ -221,7 +224,7 @@ class _ModernCategoryCard extends StatelessWidget {
                               duration: const Duration(milliseconds: 200),
                               padding: const EdgeInsets.all(6),
                               decoration: BoxDecoration(
-                                color: isFollowing ? Colors.white : Colors.white24,
+                                color: isFollowing ? Colors.white : Colors.white.withOpacity(0.24),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
